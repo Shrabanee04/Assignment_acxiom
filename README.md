@@ -4,7 +4,7 @@ AcxiomCRM is a web-based Customer Relationship Management (CRM) application deve
 
 The application includes role-based access control, data validation, audit logging, dashboard analytics, and REST API functionality to support efficient and secure CRM operations.
 
-## 🚀 Features
+##  Features
 
 ### 1. Authentication & Authorization
 - User registration, login, and logout.
