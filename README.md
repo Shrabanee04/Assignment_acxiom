@@ -1,77 +1,141 @@
-# AcxiomCRM — ASP.NET Core MVC
+# AcxiomCRM — Customer Relationship Management System
 
-A starter implementation based on the AcxiomCRM assignment specification. It uses ASP.NET Core MVC/Razor, ASP.NET Core Identity, Entity Framework Core, SQL Server, Bootstrap 5, and Chart.js.
+AcxiomCRM is a web-based Customer Relationship Management (CRM) application developed using ASP.NET Core MVC. It helps organizations manage customers, leads, sales opportunities, follow-ups, and business activities through a centralized platform.
 
-## Implemented in this starter
-- Identity login/register/logout, framework-managed password hashes, password policy and lockout.
-- Admin, Manager and SalesExecutive roles (seeded on startup).
-- Dashboard KPI cards and Chart.js lead/opportunity charts.
-- Customer CRUD with required/email/phone validation and duplicate email/phone checks.
-- Lead CRUD with status/source/priority fields.
-- Opportunity CRUD with amount, probability and expected-close-date business validation.
-- Follow-up scheduling, past-date validation and completion.
-- Audit logging for core CRM create/update/delete/completion actions; Admin-only audit page.
-- Authenticated REST Customer API: GET list, GET by id, POST, PUT and role-protected DELETE/deactivation.
-- Search for customer, lead, opportunity and audit lists.
-- Anti-forgery tokens on MVC state-changing forms and EF Core parameterized data access.
+The application includes role-based access control, data validation, audit logging, dashboard analytics, and REST API functionality to support efficient and secure CRM operations.
 
-## Prerequisites
-- .NET 8 SDK
-- SQL Server LocalDB (default Windows setup), or change `ConnectionStrings:DefaultConnection` in `appsettings.json` to your SQL Server instance.
+## 🚀 Features
 
-## Run locally
-1. Open a terminal in this folder.
-2. Restore packages:
-   ```bash
-   dotnet restore
-   ```
-3. Install EF tooling if needed:
-   ```bash
-   dotnet tool install --global dotnet-ef
-   ```
-4. Create the database:
-   ```bash
-   dotnet ef migrations add InitialCreate
-   dotnet ef database update
-   ```
-5. Run:
-   ```bash
-   dotnet run
-   ```
-6. Open the HTTPS URL printed in the terminal.
+### 1. Authentication & Authorization
+- User registration, login, and logout.
+- Secure password hashing using ASP.NET Core Identity.
+- Configurable password policy and account lockout.
+- Role-based access for Admin, Manager, and Sales Executive.
+- Authorization for protected application pages and API endpoints.
 
-### Demo admin account
-- Email: `admin@acxiomcrm.local`
-- Password: `Admin@12345!`
+### 2. Dashboard
+- Total customer count.
+- Total lead count.
+- Open opportunities.
+- Won and lost opportunities.
+- Sales pipeline value.
+- Interactive charts using Chart.js.
 
-The application seeds this local demo account when it starts. Change the password and remove/replace the demo credentials before deployment. Do not publish real secrets or production database credentials.
+### 3. Customer Management
+- Create, view, update, and delete customer records.
+- Search customers by name, email, phone, and company.
+- Validate email addresses and phone numbers.
+- Prevent duplicate email addresses and phone numbers.
+- Track customer status and creation information.
 
-## API quick test
-Sign in and use the authenticated cookie in a browser/API client:
-- `GET /api/customers`
-- `GET /api/customers/{id}`
-- `POST /api/customers`
-- `PUT /api/customers/{id}`
-- `DELETE /api/customers/{id}` (Admin/Manager; deactivates)
+### 4. Lead Management
+- Create, view, update, and delete leads.
+- Track lead source, status, priority, and expected value.
+- Search leads by name, company, and status.
+- Support lead statuses such as New, Contacted, Qualified, Converted, and Lost.
 
-Example POST JSON:
-```json
-{
-  "customerCode": "CUS-1001",
-  "customerName": "Ananya Das",
-  "email": "ananya@example.com",
-  "phone": "9876543210",
-  "companyName": "Example Pvt Ltd",
-  "address": "Bhubaneswar",
-  "city": "Bhubaneswar",
-  "state": "Odisha",
-  "status": "Active"
-}
-```
+### 5. Opportunity Management
+- Manage sales opportunities and pipeline stages.
+- Track opportunity amount and probability.
+- Calculate weighted pipeline value.
+- Validate opportunity amounts and probability ranges.
+- Prevent past expected close dates for open opportunities.
 
-## Before submitting
-- Run the project and verify it builds in your environment.
-- Set a valid SQL Server connection string.
-- Test login, CRUD, invalid form submissions, API status codes and role restrictions.
-- Add screenshots and a short test report if requested.
-- The assignment asks for assigned-record/team-level authorization, lead conversion, full activity management, monthly sales reporting and more. Treat this as a starter implementation and verify/complete those items rather than claiming every requirement is fully implemented.
+### 6. Follow-Up Management
+- Schedule customer follow-ups.
+- Track follow-up types, dates, and status.
+- Record follow-up remarks.
+- Mark planned follow-ups as completed.
+- Validate follow-up dates.
+
+### 7. Audit Logging
+- Record important CRM operations.
+- Track actions involving customers, leads, opportunities, and follow-ups.
+- Store timestamps, user identifiers, and record details.
+- Restrict the audit log page to administrators.
+
+### 8. REST API
+- Retrieve customer records.
+- Retrieve individual customers.
+- Create customer records.
+- Update customer records.
+- Deactivate customers through the API.
+- Validate incoming requests and return appropriate HTTP status codes.
+
+### 9. User Interface
+- Responsive layout using Bootstrap 5.
+- Dashboard cards and interactive charts.
+- Searchable data tables.
+- Forms with validation messages.
+- Consistent navigation across CRM modules.
+
+## 🛠️ Technology Stack
+
+### Backend
+- C#
+- ASP.NET Core MVC
+- ASP.NET Core Identity
+- Entity Framework Core
+
+### Frontend
+- Razor Views
+- HTML5
+- CSS3
+- Bootstrap 5
+- JavaScript
+- Chart.js
+
+### Database
+- Microsoft SQL Server
+
+### Development Tools
+- Visual Studio / Visual Studio Code
+- .NET SDK
+- Git
+- GitHub
+
+## 🏗️ Application Architecture
+
+The application follows a layered MVC architecture.
+
+```text
+AcxiomCRM
+│
+├── Controllers
+│   ├── DashboardController
+│   ├── CustomersController
+│   ├── LeadsController
+│   ├── OpportunitiesController
+│   ├── FollowUpsController
+│   ├── AuditController
+│   └── Api
+│
+├── Models
+│   ├── ApplicationUser
+│   ├── Customer
+│   ├── Lead
+│   ├── Opportunity
+│   ├── FollowUp
+│   ├── Activity
+│   └── AuditLog
+│
+├── Data
+│   ├── ApplicationDbContext
+│   └── DbInitializer
+│
+├── Services
+│   ├── IAuditService
+│   └── AuditService
+│
+├── Views
+│   ├── Dashboard
+│   ├── Customers
+│   ├── Leads
+│   ├── Opportunities
+│   ├── FollowUps
+│   ├── Audit
+│   └── Shared
+│
+├── Program.cs
+├── appsettings.json
+└── AcxiomCRM.csproj
