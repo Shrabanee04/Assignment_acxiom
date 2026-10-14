@@ -33,6 +33,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<IAuditService, AuditService>();
+builder.Services.AddScoped<CrmAccessService>();
 
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())
