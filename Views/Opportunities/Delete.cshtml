@@ -1,0 +1,3 @@
+@model Opportunity
+@{ViewData["Title"]="Delete opportunity";}
+<div class="card p-4"><h1 class="text-danger">Delete opportunity?</h1><p>Delete <strong>@Model.OpportunityName</strong>?</p><form asp-action="Delete" method="post"><input type="hidden" asp-for="OpportunityId"/><button class="btn btn-danger">Confirm delete</button> <a asp-action="Index" class="btn btn-light">Cancel</a></form></div>

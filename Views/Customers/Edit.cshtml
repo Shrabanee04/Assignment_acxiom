@@ -1,0 +1,16 @@
+@model Customer
+@{ViewData["Title"] = ViewContext.RouteData.Values["action"]?.ToString() + " customer";}
+<h1 class="page-title mb-1">@ViewData["Title"]</h1><p class="muted mb-4">Fields marked required must be completed.</p>
+<div class="card p-4"><form asp-action="@ViewContext.RouteData.Values["action"]" method="post"><div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div><input type="hidden" asp-for="CustomerId"/><input type="hidden" asp-for="CreatedDate"/><input type="hidden" asp-for="CreatedBy"/>
+<div class="row g-3">
+<div class="col-md-4"><label asp-for="CustomerCode" class="form-label"></label><input asp-for="CustomerCode" class="form-control"/><span asp-validation-for="CustomerCode" class="text-danger"></span></div>
+<div class="col-md-8"><label asp-for="CustomerName" class="form-label"></label><input asp-for="CustomerName" class="form-control"/><span asp-validation-for="CustomerName" class="text-danger"></span></div>
+<div class="col-md-6"><label asp-for="Email" class="form-label"></label><input asp-for="Email" class="form-control"/><span asp-validation-for="Email" class="text-danger"></span></div>
+<div class="col-md-6"><label asp-for="Phone" class="form-label"></label><input asp-for="Phone" class="form-control"/><span asp-validation-for="Phone" class="text-danger"></span></div>
+<div class="col-md-6"><label asp-for="CompanyName" class="form-label"></label><input asp-for="CompanyName" class="form-control"/></div>
+<div class="col-md-6"><label asp-for="Address" class="form-label"></label><input asp-for="Address" class="form-control"/></div>
+<div class="col-md-4"><label asp-for="City" class="form-label"></label><input asp-for="City" class="form-control"/></div>
+<div class="col-md-4"><label asp-for="State" class="form-label"></label><input asp-for="State" class="form-control"/></div>
+<div class="col-md-4"><label asp-for="Status" class="form-label"></label><select asp-for="Status" class="form-select"><option>Active</option><option>Inactive</option><option>Prospect</option></select></div>
+</div><div class="mt-4 d-flex gap-2"><button class="btn btn-primary px-4">Save customer</button><a asp-action="Index" class="btn btn-light">Cancel</a></div></form></div>
+@section Scripts {<partial name="_ValidationScriptsPartial" />}

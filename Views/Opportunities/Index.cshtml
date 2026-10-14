@@ -1,0 +1,6 @@
+@model IEnumerable<Opportunity>
+@{ViewData["Title"]="Opportunities";}
+<div class="d-flex justify-content-between mb-4"><div><h1 class="page-title">Opportunities</h1><p class="muted">Manage deals, stages and weighted pipeline.</p></div><a class="btn btn-primary align-self-start" asp-action="Create">＋ New opportunity</a></div>
+<div class="card p-3"><form method="get" class="d-flex gap-2 mb-3"><input class="form-control" name="q" value="@ViewBag.Query" placeholder="Search opportunity or stage"/><button class="btn btn-dark">Search</button></form><div class="table-responsive"><table class="table table-hover"><thead><tr><th>Opportunity</th><th>Stage</th><th>Amount</th><th>Probability</th><th>Weighted</th><th>Close date</th><th>Status</th><th>Actions</th></tr></thead><tbody>
+@foreach(var x in Model){<tr><td><b>@x.OpportunityName</b></td><td>@x.Stage</td><td>@x.Amount.ToString("C")</td><td>@x.Probability%</td><td>@x.WeightedPipeline.ToString("C")</td><td>@x.ExpectedCloseDate.ToString("d")</td><td>@x.Status</td><td><a asp-action="Edit" asp-route-id="@x.OpportunityId">Edit</a> · <a class="text-danger" asp-action="Delete" asp-route-id="@x.OpportunityId">Delete</a></td></tr>}
+@if(!Model.Any()){<tr><td colspan="8" class="text-center muted py-4">No opportunities found.</td></tr>}</tbody></table></div></div>

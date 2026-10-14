@@ -1,0 +1,6 @@
+@model IEnumerable<Lead>
+@{ViewData["Title"]="Leads";}
+<div class="d-flex justify-content-between mb-4"><div><h1 class="page-title">Leads</h1><p class="muted">Track prospects from first contact to conversion.</p></div><a class="btn btn-primary align-self-start" asp-action="Create">＋ New lead</a></div>
+<div class="card p-3"><form method="get" class="d-flex gap-2 mb-3"><input class="form-control" name="q" value="@ViewBag.Query" placeholder="Search lead, company, status"/><button class="btn btn-dark">Search</button></form><div class="table-responsive"><table class="table table-hover"><thead><tr><th>Lead</th><th>Company</th><th>Source</th><th>Status</th><th>Priority</th><th>Expected value</th><th>Actions</th></tr></thead><tbody>
+@foreach(var x in Model){<tr><td><b>@x.LeadName</b><div class="small muted">@x.LeadCode</div></td><td>@x.CompanyName</td><td>@x.Source</td><td><span class="badge text-bg-info">@x.Status</span></td><td>@x.Priority</td><td>@x.ExpectedValue.ToString("C")</td><td><a asp-action="Edit" asp-route-id="@x.LeadId">Edit</a> · <a class="text-danger" asp-action="Delete" asp-route-id="@x.LeadId">Delete</a></td></tr>}
+@if(!Model.Any()){<tr><td colspan="7" class="text-center muted py-4">No leads found.</td></tr>}</tbody></table></div></div>
